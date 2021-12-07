@@ -11,7 +11,7 @@ typedef struct {
 } PeerConnectionData;
 
 void error_exit(const std::string& error_string) {
-    throw error_string;
+    throw std::runtime_error{error_string};
 }
 
 void error_exit_errno(const std::string& error_string) {
@@ -19,7 +19,7 @@ void error_exit_errno(const std::string& error_string) {
         throw Timeout();
     } else {
         std::string err = error_string + strerror(errno);
-        throw err;
+        throw std::runtime_error{err};
     }
 }
 
